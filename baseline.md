@@ -1,6 +1,7 @@
 ## how to run the code
 Python script to run the program
 python simple-baseline.py --trainfile 'train_data.csv' --testfile 'test_data.csv' --magnitudeFile 'glove.6B.100d.magnitude' --outputDirectory 'lr_test.csv'
+(The file 'glove.6B.100d.magnitude' is used in Homework4. It is too large to upload to the repo, so we didn't upload it.)
 
 Linear classifier used: 1. Logistic Regression; 2. Random Forest; 3. GBDT; 4. NN
 
