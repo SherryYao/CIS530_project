@@ -4,7 +4,6 @@ python simple-baseline.py --trainfile 'train_data.csv' --testfile 'test_data.csv
 
 Linear classifier used: 1. Logistic Regression; 2. Random Forest; 3. GBDT; 4. NN
 
-######################################################################################################################
 ## 1. Logistic Regression
 ## parameter tuning using validation set:
 C = [0.001, 0.005, 0.01, 0.05, 0.1, 1, 1.5]
@@ -42,6 +41,7 @@ criterion = [Gini (default), Information Gain]
 Acc = [0.5588616665529244, 0.5514229168088446]
 
 ## Acc score for test set (with n_estimator = 180 & criterion = Gini)
+0.547567529838766
 
 ## 3. GBDT
 still working on it
@@ -54,8 +54,10 @@ Accuracy score:
 [
     0.551627653040333,
     0.5462362656111377,
-# 0.5529925612502559, (max)
+    0.5529925612502559, (max)
     0.5383880434040811,
     0.555858868491094,
     0.5521736163243022
 ] 
+## Acc score for test set (with 10 hidden layers and 1 neurons per layer)
+0.5523836113631605
