@@ -63,6 +63,7 @@ def mean_embedding_vec(X_train):
     print("generating mean embedding feature")
     res = []
     lemmatizer=WordNetLemmatizer()
+    vectors = Magnitude(args.magnitudeFile)
     for i in range(X_train.size):
         res.append(mean_embedding(X_train[i],lemmatizer,vectors))
     return np.vstack(res)
@@ -237,7 +238,7 @@ def get_features(data, train):
     feature_3 = get_feature_tfIdf(data, train)
     feature_4 = extract_senti_based_features(data)
     X = np.hstack((feature_1,feature_2,feature_3.A,feature_4))
-    return preprocessing.scale(X)
+    return X
 
 ## main function
 def main(args):
@@ -252,20 +253,24 @@ def main(args):
     X_test = X_test.apply(preprocess_phrase)
     
     # train
+    print("get features for train data")
     X_train_new = get_features(X_train, True)
     y_train = np.array(y_train)
     
+    print("init the classifier")
     clf = LogisticRegression(C=2.0) 
+    print("fit on train data")
     clf.fit(X_train_new,y_train)
     
     # predict
+    print("get features for test data")
     X_test = get_features(X_test, False)
+    print("predicting on test data")
     predicted = clf.predict(X_test)
     pred = [[index+141734,x] for index,x in enumerate(predicted)]
     np.savetxt(args.outputDirectory,pred,delimiter=',',fmt='%d,%d',header='PhraseId,Sentiment',comments='')
     
 if __name__ == '__main__':
     args = parser.parse_args()
-    vectors = Magnitude(args.magnitudeFile)
     pp.pprint(args)
     main(args)
