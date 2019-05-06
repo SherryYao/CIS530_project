@@ -1,3 +1,5 @@
-input:train data file path and test data file path
-output:test data accuracy
-example return:0.612
+run using following command line 
+
+python score.py --trainfile 'train_data.csv' --testfile 'test_data.csv'
+ouput: test accuracy
+example output:0.612
