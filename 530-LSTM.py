@@ -20,8 +20,8 @@ import argparse
 import pprint 
 
 parser = argparse.ArgumentParser()
-parser.add_argument(args.trainfile, type=str, required=True)
-parser.add_argument(args.testfile, type=str, required=True)
+parser.add_argument("--trainfile", type=str, required=True)
+parser.add_argument("--testfile", type=str, required=True)
 
 def main(args):
 	train_df = pd.read_csv(args.trainfile,header=0,delimiter=',')
