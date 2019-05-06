@@ -22,6 +22,7 @@ import pprint
 parser = argparse.ArgumentParser()
 parser.add_argument("--trainfile", type=str, required=True)
 parser.add_argument("--testfile", type=str, required=True)
+parser.add_argument("--outputfile", type=str, required=True)
 
 def main(args):
 	train_df = pd.read_csv(args.trainfile,header=0,delimiter=',')
@@ -63,7 +64,11 @@ def main(args):
 	    accuracy_score = float(correct) / (correct + incorrect)
 	    print("Accuracy score: ", accuracy_score)
 	    return accuracy_score
-	return compute_accuracy(y_test,y_predict)
+	test_df["predict"] = y_predict
+	pred = []
+	for row in range(len(test_df)):
+    		pred.append([test_df.iloc[[row]]["PhraseId"].values[0],test_df.iloc[[row]]["predict"].values[0]])
+	np.savetxt(args.outputDirectory,pred,delimiter=',',fmt='%d,%d',header='PhraseId,Sentiment',comments='')
 
 if __name__ == '__main__':
 	args = parser.parse_args()
